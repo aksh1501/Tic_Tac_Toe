@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Tic-tac-toe</title>
+        <meta charset="UTF-8">
+        <meta name="description" content="This webpage is to learn HTML">
+        <meta name="keywords" content="html5,learn code,CSS">
+        <meta name="author" content="Akshit Sharma">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="app.css">
+        <script src="app.js" defer></script>
+    </head>
+    <body>
+        <header>
+            <h1 class="heading">Tic-Tac-Toe</h1>
+        </header>
+        <main>
+            <div class="background-image"></div>
+            <div class="board"> 
+            <!-- all the elements of the tic-tac-toe are inside this div board-->
+                <div class="cell" data-cell></div>
+                <div class="cell" data-cell></div>
+                <div class="cell" data-cell></div>
+                <div class="cell" data-cell></div>
+                <div class="cell" data-cell></div>
+                <div class="cell" data-cell></div>
+                <div class="cell" data-cell></div>
+                <div class="cell" data-cell></div>
+                <div class="cell" data-cell></div>
+            <!-- we have 9 cells each are where we place 'X' or 'O' -->
+            </div>
+            
+            <div class="winning-message">
+                <div data-winning-message-text></div> 
+                <!-- using a data selector to post the winning message -->
+                <button class="restartButton">Restart</button>
+            </div>
+        </main>
+    </body>
+</html>

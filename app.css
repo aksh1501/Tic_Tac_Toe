@@ -1,0 +1,225 @@
+*, *::after ,*::before{
+    box-sizing: border-box;    /*include paddding and border in height and width calculation to make sizing easier*/
+}
+
+:root  /*Creating variables which can be altered in javascript code(if needed)*/
+{
+    --cell-size: 100px;
+    --mark-size: calc(var(--cell-size)*0.9);
+}
+
+main{
+    margin: 0;  /* getting rid of all the margins as we need the content to fill the entire page*/
+}
+
+header{         /*We choose to have a sticky header*/
+    position:sticky; 
+    top:0;
+    width:100%;
+    height:100%;
+}
+
+.heading{
+    text-align: center;
+    color:rgb(250, 44, 8);
+    background-color: rgb(244, 219, 31);
+    margin: 0px;
+    height:50px;
+    font-size: 3rem;
+}
+
+
+.board     /* for the entire board where there are 9 cells each is a element in a 3x3 grid */
+{
+    width : 100vw;
+    height : 100vh;
+    display : grid;   /*The tic tac toe board is nothing but a 3x3 grid whose outer bounderies are removed*/
+    justify-content: center;  /*make items are positioned in the center*/ 
+    align-content: center;  /*The flex lines are aligned at the center to form a 3x3 grid*/
+    justify-items:center; /*each of the cells should be alligned around the center of the board*/
+    align-items:center;  /*Each of the rows should be placed in the center of the page*/
+    grid-template-columns: repeat(3,auto);  /*we want 3 columns of auto size in the grid (we get 3 rows as 3x3=9 cells)*/
+}
+
+
+.cell  /*for a cell where we place X or O*/
+{
+    width : var(--cell-size);  
+    height : var(--cell-size);
+    border: 2px solid black;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position: relative; 
+    cursor: pointer;
+}
+
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3)
+{
+    border-top: none;
+}
+
+.cell:nth-child(3n+1)   /*this is to remove the left border of 1th,4th,7th cell */
+{
+    border-left: none;
+}
+
+.cell:nth-child(3n+3)  /*this is to remove the right border of 3rd,6th and 9th cells*/
+{
+    border-right: none;
+}
+
+
+.cell.cell:nth-child(7),   /*this is to remove the bottom margin for 7, 8 and 9th cells*/
+.cell.cell:nth-child(8),
+.cell.cell:nth-child(9)
+{
+    border-bottom: none;
+}
+
+
+.cell.x,.cell.circle  /*This is to forbid the cursor on cells containing x or circle */
+{
+    cursor: not-allowed;
+}
+
+/*For the X symbol to hover over all the empty cells so that the X player can choose*/
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after
+{
+    background-color: lightgrey;
+}
+
+
+/*
+Here pseudo element ::before is / and ::after element is \ and these are stacked to create X
+*/
+/*For colouring of the X symbol to be red.The two pseudo elements before and after are the the two 45 deg slanted lines
+in the X symbol*/
+.cell.x::before,
+.cell.x::after{
+    background-color: red;
+}
+
+
+
+/*
+Here pseudo element before is / and after elemnent is \ and these are stacked to create X
+*/
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after
+{
+    content:"";
+    position: absolute;   /*just to allign X so that it has same base the cell children(the element is positioned relative to its first positioned (not static) ancestor element)*/
+    width: calc(var(--mark-size)*0.15);
+    height: var(--mark-size);
+}
+
+.cell.x::before,
+.board.x .cell:not(.x):not(.circle):hover::before
+{
+    transform:rotate(45deg);
+}
+
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::after
+{
+    transform:rotate(-45deg);
+}
+
+
+.cell.circle::before,
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::before,
+.board.circle .cell:not(.x):not(.circle):hover::after
+{
+    content:"";
+    position: absolute;    /*just to allign O so that it has same base the cell children(the element is positioned relative to its first positioned (not static) ancestor element)*/
+    border-radius: 50%;
+}
+
+.cell.circle::before{
+    background-color:black;
+}
+
+
+.board.circle .cell:not(.x):not(.circle):hover::before
+{
+    background-color: lightgrey;
+}
+
+
+
+.cell.circle::before,
+.board.circle .cell:not(.x):not(.circle):hover::before
+{
+    width: var(--mark-size);
+    height: var(--mark-size);
+}
+
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::after
+{
+    width : calc(var(--mark-size) * 0.7);
+    height : calc(var(--mark-size) * 0.7);
+    background-color: white;
+}
+
+.winning-message
+{
+    display: none;
+    position:fixed;  /*position relative to browser window*/
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color: #000;
+    opacity: 0.9;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size: 5rem;
+    flex-direction: column;
+}
+
+.winning-message div{
+    color: green;
+}
+
+.winning-message button{
+    font-size: 3rem;
+    background-color: white;
+    border:1px solid black;
+    padding :0.25em 0.5em;
+
+}
+
+.winning-message button:hover{
+    background-color: black;
+    color: white;
+    border-color:white ;
+}
+
+.winning-message.show{
+    display: flex;
+}
+
+
+.background-image{
+    position: absolute; 
+    left: 0;
+    right: 0;
+    display:inline-block;
+    background-image: url('./images/landscape-at-morning-for-game-background-vector-14966453.jpg');
+    width: 100%;
+    height:100%;
+    background-position:center !important;
+    background-size: cover !important;
+    z-index: -1;
+}
+  
