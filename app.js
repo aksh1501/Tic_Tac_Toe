@@ -6,7 +6,7 @@ function startGame()
     const CIRCLE_CLASS='circle';  /*class containing the styling of a circle symbol*/
     
     const cellElements=document.querySelectorAll('[data-cell]');
-    const board=document.getElementsByClassName('board')[0];
+    const board=document.getElementById('Board');
     
     const WINNING_COMBINATIONS=[    /*O indexed grid where we listed all the ways to win tic tac toe*/
         [0,1,2],[3,4,5],[6,7,8],
@@ -14,9 +14,9 @@ function startGame()
         [0,4,8],[2,4,6]
     ];
 
-    const restartButton=document.getElementsByClassName("restartButton")[0];
+    const restartButton=document.getElementById("RestartButton");
 
-    const winningMessageElement=document.getElementsByClassName('winning-message')[0];
+    const winningMessageElement=document.getElementById("winningMessage");
 
     const winningMessageTextElement=document.querySelector("[data-winning-message-text]");
 

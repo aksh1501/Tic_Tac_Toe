@@ -16,7 +16,7 @@
         </header>
         <main>
             <div class="background-image"></div>
-            <div class="board"> 
+            <div class="board" id="Board"> 
             <!-- all the elements of the tic-tac-toe are inside this div board-->
                 <div class="cell" data-cell></div>
                 <div class="cell" data-cell></div>
@@ -30,10 +30,10 @@
             <!-- we have 9 cells each are where we place 'X' or 'O' -->
             </div>
             
-            <div class="winning-message">
+            <div class="winning-message" id="winningMessage">
                 <div data-winning-message-text></div> 
                 <!-- using a data selector to post the winning message -->
-                <button class="restartButton">Restart</button>
+                <button class="restartButton" id="RestartButton">Restart</button>
             </div>
         </main>
     </body>

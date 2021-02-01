@@ -188,7 +188,7 @@ Here pseudo element before is / and after elemnent is \ and these are stacked to
 }
 
 .winning-message div{
-    color: green;
+    color: purple;
 }
 
 .winning-message button{
